@@ -1,0 +1,22 @@
+.cartBadgeContainer {
+  width: 1.8rem;
+}
+/* .cartIcon {
+
+} */
+.cartQuantity {
+  color: white;
+  background-color: #d32f2f;
+  border-radius: 1000px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+
+  transform: translate(-5px, -5px);
+}
+
+.cartQuantity h4 {
+  transform: translateY(-1px);
+  font-size: 0.8rem;
+  font-weight: normal;
+}
