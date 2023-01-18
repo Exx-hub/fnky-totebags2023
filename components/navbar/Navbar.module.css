@@ -6,8 +6,10 @@
   padding: 1rem 0;
   max-width: 1100px;
   /* width: 90%; */
+}
 
-  /* TBD if max width or just width 90%, will depend on content layout. let's see how it will look */
+.logo {
+  padding-left: 0.5rem;
 }
 
 .logo h1 {
@@ -54,4 +56,12 @@
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
   font-weight: 700;
+}
+
+/* temporary */
+@media screen and (min-width: 1500px) {
+  .headerContainer {
+    max-width: none;
+    width: 80%;
+  }
 }

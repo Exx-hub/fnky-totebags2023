@@ -6,7 +6,7 @@ import { useState } from "react";
 
 function Navbar() {
   const [subNavOpen, setSubNavOpen] = useState(false);
-  console.log(subNavOpen);
+
   const toggleSubNav = () => {
     setSubNavOpen(!subNavOpen);
   };
@@ -20,9 +20,9 @@ function Navbar() {
       <section className={styles.headerRight}>
         <nav className={styles.nav}>
           <Link href="/">Shop</Link>
-          <Link href="/">About</Link>
-          <Link href="/">FAQ</Link>
-          <Link href="/">Contact</Link>
+          <Link href="/about">About</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
         <section className={styles.actionButtons}>
           <ProfileMenu toggleSubNav={toggleSubNav} />
@@ -35,10 +35,10 @@ function Navbar() {
             onClick={() => setSubNavOpen(false)}
           >
             <Link href="/orders">My Orders</Link>
-            <Link href="/">My Wishlist</Link>
-            <Link href="/">My Account</Link>
+            <Link href="/wishlist">My Wishlist</Link>
+            <Link href="/account">My Account</Link>
             <hr />
-            <Link href="/">Logout</Link>
+            <Link href="/login">Logout</Link>
           </nav>
         )}
       </section>

@@ -1,16 +1,8 @@
 import type { NextPage } from "next";
-import Navbar from "../components/navbar";
+import Shop from "../components/shop";
 
 const Home: NextPage = () => {
-  return (
-    <main>
-      <Navbar />
-      {/* Navigation  */}
-      {/* Main Shop  */}
-      {/* About  */}
-      {/* Footer  */}
-    </main>
-  );
+  return <Shop />;
 };
 
 export default Home;

@@ -15,3 +15,5 @@ function ProfileMenu({ toggleSubNav }: ProfileMenuProps) {
 }
 
 export default ProfileMenu;
+
+// if logged in initials, if not profile badge
