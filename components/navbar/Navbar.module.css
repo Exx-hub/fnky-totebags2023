@@ -50,6 +50,8 @@
   top: 1.6rem;
   padding: 0.5rem 1rem;
   border: 1px solid lightgray;
+  z-index: 999;
+  background-color: white;
 }
 
 .profileMenu a {

@@ -1,22 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import { IProduct } from "../../types/interfaces";
 import styles from "./ShopItem.module.css";
 
-interface ShopItem {
-  name: string;
-  sku: string;
-  bagImage: string;
-  patternImage: string;
-  price: string;
-  description: string;
-}
-
 interface ShopItemProps {
-  item: ShopItem;
+  item: IProduct;
 }
 
 function ShopItem({ item }: ShopItemProps) {
-  const { name, bagImage, patternImage, price } = item;
+  const { name, bagImage, patternImage, price, sku } = item;
 
   const [show, setShow] = useState(false);
 
@@ -37,11 +30,14 @@ function ShopItem({ item }: ShopItemProps) {
         <Image
           src={!show ? bagImage : patternImage}
           alt=""
-          width={350}
-          height={350}
-          priority
+          width={500}
+          height={500}
         />
-        {show && <div className={styles.quickView}>Quick View</div>}
+        {show && (
+          <Link href={`/product/${sku}`} className={styles.quickView}>
+            View Item
+          </Link>
+        )}
       </section>
       <section className={styles.shopItemDetails}>
         <h2>{name}</h2>
