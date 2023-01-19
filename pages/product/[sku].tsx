@@ -33,6 +33,8 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: any) => {
   const { sku } = context.params;
 
+  await connectDb();
+
   const product = await Product.findOne({ sku }).lean();
 
   if (!product) {
