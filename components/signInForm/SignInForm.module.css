@@ -1,0 +1,59 @@
+.signInContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 7rem;
+}
+
+.signInContainer h1 {
+  font-size: 3rem;
+}
+
+.signInContainer p {
+  color: gray;
+}
+
+.signInContainer a {
+  color: #0a75b2;
+  text-decoration: underline;
+}
+
+.signInForm {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+.signInForm input {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid lightgray;
+  font-size: 1.05rem;
+}
+
+.signInForm input::placeholder {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.signInForm button {
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #0a75b2;
+  padding: 1rem 0;
+  border-radius: 5px;
+  width: 98%;
+  margin: 0 auto;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.signInForm button:hover {
+  background-color: #2a93d0;
+}

@@ -31,6 +31,7 @@
 .nav a {
   margin-right: 1rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .actionButtons {
@@ -39,25 +40,8 @@
 
 .actionButtons > div {
   display: flex;
-  margin: 0 0.5rem;
-}
-
-.profileMenu {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  right: 3.6rem;
-  top: 1.6rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid lightgray;
-  z-index: 999;
-  background-color: white;
-}
-
-.profileMenu a {
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
-  font-weight: 700;
+  margin-left: 0.8rem;
+  cursor: pointer;
 }
 
 /* temporary */

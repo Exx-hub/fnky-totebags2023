@@ -1,15 +1,29 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import CartBadge from "../cartBadge";
-import ProfileMenu from "../profileMenu";
-import { useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { signOut, useSession } from "next-auth/react";
 
 function Navbar() {
-  const [subNavOpen, setSubNavOpen] = useState(false);
+  const { data: session } = useSession();
 
-  const toggleSubNav = () => {
-    setSubNavOpen(!subNavOpen);
-  };
+  const navLinks = session ? (
+    <>
+      <Link href="/">Shop</Link>
+      <Link href="/orders">My Orders</Link>
+      <Link href="/wishlist">Wishlist</Link>
+      <Link href="/auth/signin" onClick={() => signOut({ redirect: false })}>
+        Sign Out
+      </Link>
+    </>
+  ) : (
+    <>
+      <Link href="/">Shop</Link>
+      <Link href="/auth/signup">Sign Up</Link>
+      <Link href="/auth/signin">Sign In</Link>
+    </>
+  );
+
   return (
     <header className={styles.headerContainer}>
       <section className={styles.logo}>
@@ -18,32 +32,16 @@ function Navbar() {
       </section>
 
       <section className={styles.headerRight}>
-        <nav className={styles.nav}>
-          <Link href="/">Shop</Link>
-          <Link href="/about">About</Link>
-          <Link href="/faq">FAQ</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
+        <nav className={styles.nav}>{navLinks}</nav>
         <section className={styles.actionButtons}>
-          <ProfileMenu toggleSubNav={toggleSubNav} />
+          <FaUserCircle />
           <CartBadge />
         </section>
-
-        {subNavOpen && (
-          <nav
-            className={styles.profileMenu}
-            onClick={() => setSubNavOpen(false)}
-          >
-            <Link href="/orders">My Orders</Link>
-            <Link href="/wishlist">My Wishlist</Link>
-            <Link href="/account">My Account</Link>
-            <hr />
-            <Link href="/login">Logout</Link>
-          </nav>
-        )}
       </section>
     </header>
   );
 }
 
 export default Navbar;
+
+// if logged in circle with initials for the circle
