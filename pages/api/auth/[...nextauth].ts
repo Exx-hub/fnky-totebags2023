@@ -8,6 +8,7 @@ const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  secret: "A7v1n_t3am3",
   providers: [
     CredentialsProvider({
       type: "credentials",
