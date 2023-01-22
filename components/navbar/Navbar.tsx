@@ -11,7 +11,7 @@ function Navbar() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const { cartItems } = useContext(ShoppingCartContext);
+  const { cartQuantity } = useContext(ShoppingCartContext);
 
   const authenticated = status === "authenticated";
 
@@ -35,7 +35,7 @@ function Navbar() {
   return (
     <>
       <header className={styles.headerContainer}>
-        <section className={styles.logo}>
+        <section className={styles.logo} onClick={() => router.push("/")}>
           <h1>FNKY</h1>
           <h4>Printed Tote Bags</h4>
         </section>
@@ -49,7 +49,7 @@ function Navbar() {
               onClick={() => router.push("/cart")}
             >
               <FaUserCircle />
-              <CartBadge cartItemsQty={cartItems.length} />
+              <CartBadge cartItemsQty={cartQuantity} />
             </section>
           )}
         </section>

@@ -1,10 +1,10 @@
-import { PopulatedCartItem } from "../../types/interfaces";
+import { PopulatedItem } from "../../types/interfaces";
 import CartItem from "../cartItem/CartItem";
 import styles from "./CartItemList.module.css";
 
-function CartItemList({ cartItems }: { cartItems: PopulatedCartItem[] }) {
-  const total = cartItems.reduce((acc: number, item: PopulatedCartItem) => {
-    return acc + Number(item.productId.price);
+function CartItemList({ cartItems }: { cartItems: PopulatedItem[] }) {
+  const total = cartItems.reduce((acc: number, item: PopulatedItem) => {
+    return acc + Number(item.productId.price) * Number(item.quantity);
   }, 0);
 
   return (
@@ -22,7 +22,7 @@ function CartItemList({ cartItems }: { cartItems: PopulatedCartItem[] }) {
           <hr />
           <div>
             <h4>Subtotal</h4>
-            <h4>₱{total}</h4>
+            <h4>₱{total.toFixed(2)}</h4>
           </div>
           <div>
             <h4>Shipping</h4>
@@ -31,7 +31,7 @@ function CartItemList({ cartItems }: { cartItems: PopulatedCartItem[] }) {
           <hr />
           <div>
             <h3>Total</h3>
-            <h3>₱{total}</h3>
+            <h3>₱{total.toFixed(2)}</h3>
           </div>
           <button>Checkout</button>
         </div>

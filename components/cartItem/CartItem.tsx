@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { IProduct, PopulatedCartItem } from "../../types/interfaces";
+import { PopulatedItem } from "../../types/interfaces";
 import styles from "./CartItem.module.css";
 import { FaTimes } from "react-icons/fa";
 import { useState } from "react";
 
-function CartItem({ item }: { item: PopulatedCartItem }) {
+function CartItem({ item }: { item: PopulatedItem }) {
   const { bagImage, name, price } = item.productId;
   const [quantity, setQuantity] = useState(item.quantity);
   return (
@@ -14,7 +14,7 @@ function CartItem({ item }: { item: PopulatedCartItem }) {
       </div>
       <div className={styles.itemName}>
         <h4>{name}</h4>
-        <p>₱{Number(price) * quantity}</p>
+        <p>₱{Number(price) * (quantity || 0)}</p>
         <h5>Qty.</h5>
         <input
           type="number"

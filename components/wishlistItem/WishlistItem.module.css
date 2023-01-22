@@ -1,0 +1,29 @@
+.wishlistItemContainer {
+  text-align: center;
+  margin: 1rem;
+  max-width: 250px;
+  position: relative;
+}
+
+.wishlistItemContainer p {
+  color: gray;
+}
+
+.wishlistItemContainer button {
+  background-color: black;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 0.7rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+}

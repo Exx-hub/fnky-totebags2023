@@ -6,11 +6,11 @@ import { useRouter } from "next/router";
 import CartItemList from "../components/cartItemList";
 import Empty from "../components/empty";
 import User from "../models/User";
-import { PopulatedCartItem } from "../types/interfaces";
+import { PopulatedItem } from "../types/interfaces";
 import connectDb from "../utils/connectDb";
 
 interface CartProps {
-  cartItems: PopulatedCartItem[];
+  cartItems: PopulatedItem[];
   session: Session;
 }
 
@@ -60,6 +60,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const cartItems = foundUser.cart.items;
+
+  console.log(cartItems);
 
   return {
     props: {

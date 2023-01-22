@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   const { email } = req.query;
 
-  console.log(email);
+  // console.log(email);
 
   const user = await User.findOne({ email });
 

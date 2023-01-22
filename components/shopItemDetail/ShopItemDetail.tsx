@@ -2,7 +2,7 @@ import Image from "next/image";
 import { IProduct } from "../../types/interfaces";
 import { FaRegHeart } from "react-icons/fa";
 import styles from "./ShopItemDetail.module.css";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -17,12 +17,39 @@ function ShopItemDetail({ product }: ShopItemDetailProps) {
   const { data, status } = useSession();
   const router = useRouter();
 
-  const addToBag = async () => {
+  const addToBag = async (isBuyNow: boolean) => {
     if (status !== "authenticated") {
       router.replace("/auth/signin");
     }
 
     const result = await fetch(`/api/cartItems`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data?.user?.email,
+        prodId: _id,
+      }),
+    });
+
+    const apiData = await result.json();
+
+    console.log(apiData);
+
+    if (isBuyNow) {
+      router.push("/cart");
+    } else {
+      router.push("/");
+    }
+  };
+
+  const addToWishList = async () => {
+    if (status !== "authenticated") {
+      router.replace("/auth/signin");
+    }
+
+    const result = await fetch(`/api/wishlist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,14 +82,16 @@ function ShopItemDetail({ product }: ShopItemDetailProps) {
           type="number"
         />
         <div className={styles.shopItemDetailAddButtons}>
-          <button className={styles.addToCart} onClick={addToBag}>
+          <button className={styles.addToCart} onClick={() => addToBag(false)}>
             Add to Bag
           </button>
-          <button className={styles.addToWishlist}>
+          <button className={styles.addToWishlist} onClick={addToWishList}>
             <FaRegHeart />
           </button>
         </div>
-        <button className={styles.buyNow}>Buy Now</button>
+        <button className={styles.buyNow} onClick={() => addToBag(true)}>
+          Buy Now
+        </button>
       </section>
     </section>
   );
