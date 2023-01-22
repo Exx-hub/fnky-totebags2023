@@ -12,7 +12,7 @@ export interface IProduct {
 
 export interface PopulatedItem {
   productId: IProduct; // productId because saved as a ref at first then populated into full product
-  quantity?: number;
+  quantity: number;
   _id: string;
 }
 
