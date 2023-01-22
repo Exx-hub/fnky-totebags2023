@@ -19,8 +19,6 @@ export const getStaticProps = async () => {
 
   const products = await Product.find();
 
-  // console.log(products);
-
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),

@@ -4,7 +4,7 @@ import User from "../../../models/User";
 import connectDb from "../../../utils/connectDb";
 import bcrypt from "bcrypt";
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },

@@ -1,14 +1,5 @@
 import { Schema, model, models } from "mongoose";
 
-interface IUser {
-  name: string;
-  email: string;
-  password: string;
-  mobile: string;
-  cart: any[];
-  wishlist: any[];
-}
-
 const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },

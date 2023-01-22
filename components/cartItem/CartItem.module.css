@@ -1,0 +1,25 @@
+.cartItemContainer {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.itemName {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.itemName p {
+  margin: 0.5rem 0;
+}
+
+.itemName input {
+  width: 40px;
+  outline: none;
+  margin-top: 0.5rem;
+  padding-left: 0.4rem;
+}
+
+.closeIcon {
+  cursor: pointer;
+}

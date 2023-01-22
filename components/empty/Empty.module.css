@@ -1,0 +1,9 @@
+.emptyContainer {
+  text-align: center;
+  margin-top: 10rem;
+}
+
+.emptyContainer a {
+  color: #0a75b2;
+  text-decoration: underline;
+}

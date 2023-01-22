@@ -1,15 +1,14 @@
-import { FaShoppingCart, FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa";
 import styles from "./CartBadge.module.css";
 
-function CartBadge() {
-  let cartItems = ["1", 1];
+function CartBadge({ cartItemsQty }: { cartItemsQty: number }) {
   return (
     <div className={styles.cartBadgeContainer}>
       <FaShoppingBag className={styles.cartIcon} />
 
-      {cartItems.length > 0 && (
+      {cartItemsQty > 0 && (
         <div className={styles.cartQuantity}>
-          <h4>{cartItems.length}</h4>
+          <h4>{cartItemsQty}</h4>
         </div>
       )}
     </div>

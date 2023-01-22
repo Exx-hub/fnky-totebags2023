@@ -9,3 +9,18 @@ export interface IProduct {
   description: string;
   _id: string;
 }
+
+export interface PopulatedCartItem {
+  productId: IProduct; // productId because saved as a ref at first then populated into full product
+  quantity: number;
+  _id: string;
+}
+
+export interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  mobile: string;
+  cart: any[];
+  wishlist: any[];
+}

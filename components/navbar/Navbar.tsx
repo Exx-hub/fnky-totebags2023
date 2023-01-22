@@ -3,11 +3,19 @@ import Link from "next/link";
 import CartBadge from "../cartBadge";
 import { FaUserCircle } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../context/ContextProvider";
 
 function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  const navLinks = session ? (
+  const { cartItems } = useContext(ShoppingCartContext);
+
+  const authenticated = status === "authenticated";
+
+  const navLinks = authenticated ? (
     <>
       <Link href="/">Shop</Link>
       <Link href="/orders">My Orders</Link>
@@ -25,20 +33,28 @@ function Navbar() {
   );
 
   return (
-    <header className={styles.headerContainer}>
-      <section className={styles.logo}>
-        <h1>FNKY</h1>
-        <h4>Printed Tote Bags</h4>
-      </section>
-
-      <section className={styles.headerRight}>
-        <nav className={styles.nav}>{navLinks}</nav>
-        <section className={styles.actionButtons}>
-          <FaUserCircle />
-          <CartBadge />
+    <>
+      <header className={styles.headerContainer}>
+        <section className={styles.logo}>
+          <h1>FNKY</h1>
+          <h4>Printed Tote Bags</h4>
         </section>
-      </section>
-    </header>
+
+        <section className={styles.headerRight}>
+          <nav className={styles.nav}>{navLinks}</nav>
+
+          {authenticated && (
+            <section
+              className={styles.actionButtons}
+              onClick={() => router.push("/cart")}
+            >
+              <FaUserCircle />
+              <CartBadge cartItemsQty={cartItems.length} />
+            </section>
+          )}
+        </section>
+      </header>
+    </>
   );
 }
 

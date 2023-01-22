@@ -1,5 +1,7 @@
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { IProduct } from "../../types/interfaces";
 import styles from "./ShopItem.module.css";
@@ -9,7 +11,9 @@ interface ShopItemProps {
 }
 
 function ShopItem({ item }: ShopItemProps) {
-  const { name, bagImage, patternImage, price, sku } = item;
+  const { name, bagImage, patternImage, price, sku, _id } = item;
+  const { data, status } = useSession();
+  const router = useRouter();
 
   const [show, setShow] = useState(false);
 
@@ -19,6 +23,24 @@ function ShopItem({ item }: ShopItemProps) {
 
   const onLeave = () => {
     setShow(false);
+  };
+
+  const addToBag = async () => {
+    const result = await fetch(`/api/cartItems`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data?.user?.email,
+        prodId: _id,
+      }),
+    });
+
+    const apiData = await result.json();
+
+    console.log(apiData);
+    // window.location.reload();
   };
   return (
     <section
@@ -43,9 +65,14 @@ function ShopItem({ item }: ShopItemProps) {
         <h2>{name}</h2>
         <p>-----</p>
         <p>P{price}</p>
-        <button style={{ visibility: show ? "visible" : "hidden" }}>
-          Add to Bag
-        </button>
+        {status === "authenticated" && (
+          <button
+            onClick={addToBag}
+            style={{ visibility: show ? "visible" : "hidden" }}
+          >
+            Add to Bag
+          </button>
+        )}
       </section>
     </section>
   );
