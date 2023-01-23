@@ -10,19 +10,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await connectDb();
+
+  const productId = req.body.prodId;
+
+  const email = req.body.email;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(500).json({ message: "user not found" });
+  }
+
   if (req.method === "POST") {
-    await connectDb();
-
-    const productId = req.body.prodId;
-
-    const email = req.body.email;
-
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(500).json({ message: "user not found" });
-    }
-
     const filteredWishList = user.wishlist.items.filter(
       (item: WishListItem) => item.productId.toString() === productId.toString()
     );
@@ -42,18 +42,6 @@ export default async function handler(
   }
 
   if (req.method === "PATCH") {
-    await connectDb();
-
-    const productId = req.body.prodId;
-
-    const email = req.body.email;
-
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(500).json({ message: "user not found" });
-    }
-
     const filteredWishList = user.wishlist.items.filter(
       (item: WishListItem) => item.productId.toString() !== productId.toString()
     );

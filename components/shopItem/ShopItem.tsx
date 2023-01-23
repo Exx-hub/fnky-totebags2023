@@ -34,6 +34,7 @@ function ShopItem({ item }: ShopItemProps) {
       body: JSON.stringify({
         email: data?.user?.email,
         prodId: _id,
+        quantity: 1,
       }),
     });
 

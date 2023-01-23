@@ -11,18 +11,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  await connectDb();
+
+  const prodId = req.body.prodId;
+
+  const email = req.body.email;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(500).json({ message: "user not found" });
+  }
+
   if (req.method === "POST") {
-    await connectDb();
-
-    const prodId = req.body.prodId;
-
-    const email = req.body.email;
-
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(500).json({ message: "user not found" });
-    }
+    const addCartItemQuantity = req.body.quantity;
 
     // check if item exists in cart
     // index of 0 and above means alrady in cart
@@ -38,13 +40,14 @@ export default async function handler(
 
     // if not yet in cart
     if (cartProductIndex < 0) {
-      newQuantity = 1;
+      newQuantity = addCartItemQuantity;
       updatedCartItems.push({
         productId: prodId,
         quantity: newQuantity,
       });
     } else {
-      newQuantity = user.cart.items[cartProductIndex].quantity + 1;
+      newQuantity =
+        user.cart.items[cartProductIndex].quantity + addCartItemQuantity;
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     }
 
@@ -57,5 +60,19 @@ export default async function handler(
     await user.save();
 
     res.status(201).json({ message: "Product added to cart!" });
+  }
+
+  if (req.method === "PATCH") {
+    console.log(user.cart.items);
+
+    const filteredCart = user.cart.items.filter(
+      (item: ICartItem) => item.productId.toString() !== prodId.toString()
+    );
+
+    user.cart.items = filteredCart;
+
+    await user.save();
+
+    res.status(201).json({ message: "Product removed cart!" });
   }
 }
