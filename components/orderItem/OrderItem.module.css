@@ -1,0 +1,17 @@
+.orderItemContainer {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.orderItemGrid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gridItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0.5rem;
+}

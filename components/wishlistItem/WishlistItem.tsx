@@ -5,21 +5,12 @@ import { FaTimes } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction, useState } from "react";
 
-function WishlistItem({
-  item,
-  loading,
-  setLoading,
-}: {
-  item: PopulatedItem;
-  loading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
-}) {
+function WishlistItem({ item }: { item: PopulatedItem }) {
   const { data, status } = useSession();
   console.log(item);
   const { bagImage, description, price, name, _id } = item.productId;
 
   const removeWishlistItem = async () => {
-    setLoading(true);
     const result = await fetch(`/api/wishlist`, {
       method: "PATCH",
       headers: {
@@ -32,8 +23,6 @@ function WishlistItem({
     });
 
     const apiData = await result.json();
-
-    setLoading(false);
 
     console.log(apiData);
   };

@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+
 import Empty from "../components/empty";
 import WishlistComponent from "../components/wishlistComponent";
 import User from "../models/User";
@@ -15,7 +15,6 @@ interface WishlistProps {
 }
 
 function Wishlist({ session, wishlist }: WishlistProps) {
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   console.log("i re-rendered");
@@ -28,13 +27,7 @@ function Wishlist({ session, wishlist }: WishlistProps) {
     return <Empty text="No items on your list." />;
   }
 
-  return (
-    <WishlistComponent
-      wishlist={wishlist}
-      loading={loading}
-      setLoading={setLoading}
-    />
-  );
+  return <WishlistComponent wishlist={wishlist} />;
 }
 
 export default Wishlist;

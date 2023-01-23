@@ -1,0 +1,10 @@
+.ordersListContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 2rem;
+}
+
+.ordersListContainer p {
+  margin-bottom: 0.5rem;
+}

@@ -1,20 +1,12 @@
-import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 import { PopulatedItem } from "../../types/interfaces";
 import WishlistItem from "../wishlistItem";
 import styles from "./WishlistComponent.module.css";
 
 interface WishlistComponentProps {
   wishlist: PopulatedItem[];
-  loading: boolean;
-  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-function WishlistComponent({
-  wishlist,
-  loading,
-  setLoading,
-}: WishlistComponentProps) {
+function WishlistComponent({ wishlist }: WishlistComponentProps) {
   // productId holds product info because of populate.
   return (
     <section className={styles.wishlistComponentContainer}>
@@ -23,12 +15,7 @@ function WishlistComponent({
       <hr />
       <section className={styles.wishlistComponentGrid}>
         {wishlist.map((item: PopulatedItem) => (
-          <WishlistItem
-            key={item._id}
-            item={item}
-            loading={loading}
-            setLoading={setLoading}
-          />
+          <WishlistItem key={item._id} item={item} />
         ))}
       </section>
     </section>

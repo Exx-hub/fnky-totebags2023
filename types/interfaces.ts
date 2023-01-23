@@ -25,3 +25,26 @@ export interface IUser {
   cart: FixMeLater[];
   wishlist: FixMeLater[];
 }
+
+export interface OrderProduct {
+  quantity: number;
+  _id: string;
+  product: {
+    name: string;
+    sku: string;
+    bagImage: string;
+    patternImage: string;
+    price: string;
+    description: string;
+    _id: string;
+  };
+}
+
+export interface IOrderItem {
+  products: OrderProduct[];
+  user: {
+    email: string;
+    userId: string;
+  };
+  _id: string;
+}
