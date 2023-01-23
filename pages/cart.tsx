@@ -61,8 +61,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const cartItems = foundUser.cart.items;
 
-  console.log(cartItems);
-
   return {
     props: {
       session,

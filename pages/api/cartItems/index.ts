@@ -30,7 +30,7 @@ export default async function handler(
     const cartProductIndex = user.cart.items.findIndex((item: ICartItem) => {
       return item.productId.toString() === prodId.toString();
     });
-    console.log(cartProductIndex);
+    // console.log(cartProductIndex);
 
     let updatedCart;
     let newQuantity;

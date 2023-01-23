@@ -1,6 +1,7 @@
 export type FixMeLater = any;
 
 export interface IProduct {
+  _doc: FixMeLater;
   name: string;
   sku: string;
   bagImage: string;
@@ -21,6 +22,6 @@ export interface IUser {
   email: string;
   password: string;
   mobile: string;
-  cart: any[];
-  wishlist: any[];
+  cart: FixMeLater[];
+  wishlist: FixMeLater[];
 }

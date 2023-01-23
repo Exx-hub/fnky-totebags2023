@@ -1,11 +1,39 @@
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
 import { PopulatedItem } from "../../types/interfaces";
 import CartItem from "../cartItem/CartItem";
 import styles from "./CartItemList.module.css";
 
 function CartItemList({ cartItems }: { cartItems: PopulatedItem[] }) {
+  const [shippingAddress, setShippingAddress] = useState("");
+  const { data, status } = useSession();
+
+  const router = useRouter();
+
   const total = cartItems.reduce((acc: number, item: PopulatedItem) => {
     return acc + Number(item.productId.price) * Number(item.quantity);
   }, 0);
+
+  const confirmCheckout = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const result = await fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data?.user?.email,
+      }),
+    });
+
+    const apiData = await result.json();
+
+    console.log(apiData);
+
+    router.push("/orders");
+  };
 
   return (
     <section className={styles.cartItemListContainer}>
@@ -28,12 +56,26 @@ function CartItemList({ cartItems }: { cartItems: PopulatedItem[] }) {
             <h4>Shipping</h4>
             <h4>Free</h4>
           </div>
+          <div>
+            <h4>Payment</h4>
+            <h4>Cash on Delivery</h4>
+          </div>
           <hr />
           <div>
             <h3>Total</h3>
             <h3>₱{total.toFixed(2)}</h3>
           </div>
-          <button>Checkout</button>
+          <form onSubmit={confirmCheckout}>
+            <label htmlFor="address">Shipping Address</label>
+            <textarea
+              name="address"
+              rows={2}
+              maxLength={200}
+              value={shippingAddress}
+              onChange={(e) => setShippingAddress(e.target.value)}
+            ></textarea>
+            <button type="submit">Confirm Checkout</button>
+          </form>
         </div>
       </div>
     </section>
