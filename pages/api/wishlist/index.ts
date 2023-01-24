@@ -27,8 +27,6 @@ export default async function handler(
       (item: WishListItem) => item.productId.toString() === productId.toString()
     );
 
-    console.log(filteredWishList);
-
     // length > 0 --- already in included in wishlist
     if (filteredWishList.length > 0) {
       return res.status(500).json({ message: "Duplicate wishlist item" });

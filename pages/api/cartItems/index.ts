@@ -20,7 +20,7 @@ export default async function handler(
   const user = await User.findOne({ email });
 
   if (!user) {
-    return res.status(500).json({ message: "user not found" });
+    return res.status(404).json({ message: "user not found" });
   }
 
   if (req.method === "POST") {

@@ -18,18 +18,22 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
 
   const email = session.data?.user?.email;
 
+  const fetchCartItems = () => {
+    fetch(`/api/cartItems/${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setcartItems(data?.cartItems);
+      });
+  };
+
   useEffect(() => {
     if (email) {
-      fetch(`/api/cartItems/${email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setcartItems(data?.cartItems);
-        });
+      fetchCartItems();
     }
-  }, [email]);
+  }, []);
 
   return (
-    <ShoppingCartContext.Provider value={{ cartQuantity }}>
+    <ShoppingCartContext.Provider value={{ cartQuantity, fetchCartItems }}>
       {children}
     </ShoppingCartContext.Provider>
   );

@@ -4,9 +4,10 @@ import styles from "./WishlistComponent.module.css";
 
 interface WishlistComponentProps {
   wishlist: PopulatedItem[];
+  refreshData: () => void;
 }
 
-function WishlistComponent({ wishlist }: WishlistComponentProps) {
+function WishlistComponent({ wishlist, refreshData }: WishlistComponentProps) {
   // productId holds product info because of populate.
   return (
     <section className={styles.wishlistComponentContainer}>
@@ -15,7 +16,7 @@ function WishlistComponent({ wishlist }: WishlistComponentProps) {
       <hr />
       <section className={styles.wishlistComponentGrid}>
         {wishlist.map((item: PopulatedItem) => (
-          <WishlistItem key={item._id} item={item} />
+          <WishlistItem key={item._id} item={item} refreshData={refreshData} />
         ))}
       </section>
     </section>

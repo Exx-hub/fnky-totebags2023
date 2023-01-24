@@ -2,9 +2,10 @@ import Image from "next/image";
 import { IProduct } from "../../types/interfaces";
 import { FaRegHeart } from "react-icons/fa";
 import styles from "./ShopItemDetail.module.css";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useContext, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { ShoppingCartContext } from "../../context/ContextProvider";
 
 interface ShopItemDetailProps {
   product: IProduct;
@@ -13,6 +14,8 @@ interface ShopItemDetailProps {
 function ShopItemDetail({ product }: ShopItemDetailProps) {
   const { name, price, bagImage, sku, _id } = product;
   const [quantity, setQuantity] = useState(1);
+
+  const { fetchCartItems } = useContext(ShoppingCartContext);
 
   const { data, status } = useSession();
   const router = useRouter();
@@ -37,6 +40,8 @@ function ShopItemDetail({ product }: ShopItemDetailProps) {
     const apiData = await result.json();
 
     console.log(apiData);
+
+    fetchCartItems();
 
     if (isBuyNow) {
       router.push("/cart");
@@ -64,6 +69,8 @@ function ShopItemDetail({ product }: ShopItemDetailProps) {
     const apiData = await result.json();
 
     console.log(apiData);
+
+    router.push("/wishlist");
   };
 
   return (

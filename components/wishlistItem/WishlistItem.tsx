@@ -3,11 +3,15 @@ import { PopulatedItem } from "../../types/interfaces";
 import styles from "./WishlistItem.module.css";
 import { FaTimes } from "react-icons/fa";
 import { useSession } from "next-auth/react";
-import { Dispatch, SetStateAction, useState } from "react";
 
-function WishlistItem({ item }: { item: PopulatedItem }) {
+interface WishlistItemProps {
+  item: PopulatedItem;
+  refreshData: () => void;
+}
+
+function WishlistItem({ item, refreshData }: WishlistItemProps) {
   const { data, status } = useSession();
-  console.log(item);
+
   const { bagImage, description, price, name, _id } = item.productId;
 
   const removeWishlistItem = async () => {
@@ -23,6 +27,8 @@ function WishlistItem({ item }: { item: PopulatedItem }) {
     });
 
     const apiData = await result.json();
+
+    refreshData();
 
     console.log(apiData);
   };

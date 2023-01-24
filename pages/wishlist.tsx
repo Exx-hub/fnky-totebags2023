@@ -27,7 +27,11 @@ function Wishlist({ session, wishlist }: WishlistProps) {
     return <Empty text="No items on your list." />;
   }
 
-  return <WishlistComponent wishlist={wishlist} />;
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
+  return <WishlistComponent wishlist={wishlist} refreshData={refreshData} />;
 }
 
 export default Wishlist;

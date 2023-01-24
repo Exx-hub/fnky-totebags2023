@@ -1,10 +1,12 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
+
+import { useContext, useState } from "react";
 import { IProduct } from "../../types/interfaces";
 import styles from "./ShopItem.module.css";
+
+import { ShoppingCartContext } from "../../context/ContextProvider";
 
 interface ShopItemProps {
   item: IProduct;
@@ -13,7 +15,8 @@ interface ShopItemProps {
 function ShopItem({ item }: ShopItemProps) {
   const { name, bagImage, patternImage, price, sku, _id } = item;
   const { data, status } = useSession();
-  const router = useRouter();
+
+  const { fetchCartItems } = useContext(ShoppingCartContext);
 
   const [show, setShow] = useState(false);
 
@@ -40,8 +43,9 @@ function ShopItem({ item }: ShopItemProps) {
 
     const apiData = await result.json();
 
+    fetchCartItems();
+
     console.log(apiData);
-    // window.location.reload();
   };
   return (
     <section

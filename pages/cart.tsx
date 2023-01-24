@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import CartItemList from "../components/cartItemList";
 import Empty from "../components/empty";
@@ -25,7 +24,11 @@ function Cart({ cartItems, session }: CartProps) {
     return <Empty text="Bag is Empty." />;
   }
 
-  return <CartItemList cartItems={cartItems} />;
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
+  return <CartItemList cartItems={cartItems} refreshData={refreshData} />;
 }
 
 export default Cart;

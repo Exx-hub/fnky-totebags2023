@@ -2,13 +2,21 @@ import Image from "next/image";
 import { PopulatedItem } from "../../types/interfaces";
 import styles from "./CartItem.module.css";
 import { FaTimes } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSession } from "next-auth/react";
+import { ShoppingCartContext } from "../../context/ContextProvider";
 
-function CartItem({ item }: { item: PopulatedItem }) {
+interface CartItemProps {
+  item: PopulatedItem;
+  refreshData: () => void;
+}
+
+function CartItem({ item, refreshData }: CartItemProps) {
   const { data, status } = useSession();
+  const { fetchCartItems } = useContext(ShoppingCartContext);
+
   const { bagImage, name, price, _id } = item.productId;
-  const [quantity, setQuantity] = useState(item.quantity);
+  const { quantity } = item;
 
   const removeFromCart = async () => {
     const result = await fetch(`/api/cartItems`, {
@@ -25,6 +33,9 @@ function CartItem({ item }: { item: PopulatedItem }) {
     const apiData = await result.json();
 
     console.log(apiData);
+
+    fetchCartItems();
+    refreshData();
   };
 
   return (

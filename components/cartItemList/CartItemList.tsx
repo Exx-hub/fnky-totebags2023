@@ -1,14 +1,21 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { ShoppingCartContext } from "../../context/ContextProvider";
 import { PopulatedItem } from "../../types/interfaces";
 import CartItem from "../cartItem/CartItem";
 import styles from "./CartItemList.module.css";
 
-function CartItemList({ cartItems }: { cartItems: PopulatedItem[] }) {
+interface CartItemListProps {
+  cartItems: PopulatedItem[];
+  refreshData: () => void;
+}
+
+function CartItemList({ cartItems, refreshData }: CartItemListProps) {
   const [shippingAddress, setShippingAddress] = useState("");
   const { data, status } = useSession();
 
+  const { fetchCartItems } = useContext(ShoppingCartContext);
   const router = useRouter();
 
   const total = cartItems.reduce((acc: number, item: PopulatedItem) => {
@@ -32,6 +39,7 @@ function CartItemList({ cartItems }: { cartItems: PopulatedItem[] }) {
 
     console.log(apiData);
 
+    fetchCartItems();
     router.push("/orders");
   };
 
@@ -42,7 +50,7 @@ function CartItemList({ cartItems }: { cartItems: PopulatedItem[] }) {
           <h2>My cart</h2>
           <hr />
           {cartItems.map((item) => (
-            <CartItem key={item._id} item={item} />
+            <CartItem key={item._id} item={item} refreshData={refreshData} />
           ))}
         </div>
         <div className={styles.orderSummary}>
