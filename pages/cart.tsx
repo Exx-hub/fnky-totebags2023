@@ -30,7 +30,7 @@ function Cart({ cartItems, session }: CartProps) {
 
   // return
 
-  return <h1>CART</h1>;
+  return <h1>CARTttttt</h1>;
 }
 
 export default Cart;
