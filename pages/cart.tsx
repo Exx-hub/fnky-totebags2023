@@ -38,38 +38,39 @@ export default Cart;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permanent: false,
-      },
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth/signin",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
-  const email = session?.user?.email;
+  // const email = session?.user?.email;
 
-  await connectDb();
+  // await connectDb();
 
-  const foundUser = await User.findOne({ email }).populate(
-    "cart.items.productId"
-  );
+  // const foundUser = await User.findOne({ email }).populate(
+  //   "cart.items.productId"
+  // );
 
-  if (!foundUser) {
-    return {
-      redirect: {
-        destination: "/auth/signin",
-        permanent: false,
-      },
-    };
-  }
+  // if (!foundUser) {
+  //   return {
+  //     redirect: {
+  //       destination: "/auth/signin",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
-  const cartItems = foundUser.cart.items;
+  // const cartItems = foundUser.cart.items;
 
   return {
     props: {
       session,
-      cartItems: JSON.parse(JSON.stringify(cartItems)),
+      // cartItems: JSON.parse(JSON.stringify(cartItems)),
+      cartItems: [],
     },
   };
 };
