@@ -30,7 +30,7 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
     if (email) {
       fetchCartItems();
     }
-  }, []);
+  }, [email]);
 
   return (
     <ShoppingCartContext.Provider value={{ cartQuantity, fetchCartItems }}>
