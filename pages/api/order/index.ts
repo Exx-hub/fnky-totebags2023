@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Order from "../../../models/Order";
+import Product from "../../../models/Product";
 import User from "../../../models/User";
 import { PopulatedItem } from "../../../types/interfaces";
 import connectDb from "../../../utils/connectDb";
