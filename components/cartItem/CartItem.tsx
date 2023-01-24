@@ -8,10 +8,9 @@ import { ShoppingCartContext } from "../../context/ContextProvider";
 
 interface CartItemProps {
   item: PopulatedItem;
-  refreshData: () => void;
 }
 
-function CartItem({ item, refreshData }: CartItemProps) {
+function CartItem({ item }: CartItemProps) {
   const { data, status } = useSession();
   const { fetchCartItems } = useContext(ShoppingCartContext);
 
@@ -35,7 +34,6 @@ function CartItem({ item, refreshData }: CartItemProps) {
     console.log(apiData);
 
     fetchCartItems();
-    refreshData();
   };
 
   return (

@@ -24,11 +24,7 @@ function Cart({ cartItems, session }: CartProps) {
     return <Empty text="Bag is Empty." />;
   }
 
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
-
-  return <CartItemList cartItems={cartItems} refreshData={refreshData} />;
+  return <CartItemList cartItems={cartItems} />;
 }
 
 export default Cart;
