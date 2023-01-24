@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import Empty from "../components/empty";
 import WishlistComponent from "../components/wishlistComponent";
+import Product from "../models/Product";
 import User from "../models/User";
 import { PopulatedItem } from "../types/interfaces";
 import connectDb from "../utils/connectDb";
@@ -51,6 +52,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const email = session?.user?.email;
 
   await connectDb();
+
+  const products = await Product.find();
 
   const foundUser = await User.findOne({ email }).populate(
     "wishlist.items.productId"
