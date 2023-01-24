@@ -12,6 +12,8 @@ export default async function handler(
   await connectDb();
   const email = req.body.email;
 
+  const products = await Product.find({});
+
   const user = await User.findOne({ email }).populate("cart.items.productId");
 
   if (!user) {
