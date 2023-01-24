@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import CartItemList from "../components/cartItemList";
 import Empty from "../components/empty";
+import Product from "../models/Product";
 import User from "../models/User";
 import { PopulatedItem } from "../types/interfaces";
 import connectDb from "../utils/connectDb";
@@ -28,9 +29,7 @@ function Cart({ cartItems, session }: CartProps) {
     router.replace(router.asPath);
   };
 
-  // return
-
-  return <h1>CARTttttt</h1>;
+  return <CartItemList cartItems={cartItems} refreshData={refreshData} />;
 }
 
 export default Cart;
@@ -38,39 +37,40 @@ export default Cart;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/signin",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
 
-  // const email = session?.user?.email;
+  const email = session?.user?.email;
 
-  // await connectDb();
+  await connectDb();
 
-  // const foundUser = await User.findOne({ email }).populate(
-  //   "cart.items.productId"
-  // );
+  const products = await Product.find();
 
-  // if (!foundUser) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/signin",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  const foundUser = await User.findOne({ email }).populate(
+    "cart.items.productId"
+  );
 
-  // const cartItems = foundUser.cart.items;
+  if (!foundUser) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  const cartItems = foundUser.cart.items;
 
   return {
     props: {
       session,
-      // cartItems: JSON.parse(JSON.stringify(cartItems)),
-      cartItems: [],
+      cartItems: JSON.parse(JSON.stringify(cartItems)),
     },
   };
 };
