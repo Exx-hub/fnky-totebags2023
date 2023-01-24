@@ -8,9 +8,10 @@ import styles from "./CartItemList.module.css";
 
 interface CartItemListProps {
   cartItems: PopulatedItem[];
+  refreshData: () => void;
 }
 
-function CartItemList({ cartItems }: CartItemListProps) {
+function CartItemList({ cartItems, refreshData }: CartItemListProps) {
   const [shippingAddress, setShippingAddress] = useState("");
   const { data, status } = useSession();
 
@@ -49,7 +50,7 @@ function CartItemList({ cartItems }: CartItemListProps) {
           <h2>My cart</h2>
           <hr />
           {cartItems.map((item) => (
-            <CartItem key={item._id} item={item} />
+            <CartItem key={item._id} item={item} refreshData={refreshData} />
           ))}
         </div>
         <div className={styles.orderSummary}>
