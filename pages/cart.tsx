@@ -28,7 +28,9 @@ function Cart({ cartItems, session }: CartProps) {
     router.replace(router.asPath);
   };
 
-  return <CartItemList cartItems={cartItems} refreshData={refreshData} />;
+  // return
+
+  return <h1>CART</h1>;
 }
 
 export default Cart;
