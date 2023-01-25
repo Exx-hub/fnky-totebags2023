@@ -11,7 +11,7 @@ const orderSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
     email: { type: String, required: true },
   },
-  // createdOn: new Date()
+  createdOn: { type: Date, default: new Date() },
 });
 
 const Order = models.Order || model("Order", orderSchema);

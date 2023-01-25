@@ -25,22 +25,24 @@ function CartItemList({ cartItems, refreshData }: CartItemListProps) {
   const confirmCheckout = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const result = await fetch("/api/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: data?.user?.email,
-      }),
-    });
+    if (shippingAddress) {
+      const result = await fetch("/api/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data?.user?.email,
+        }),
+      });
 
-    const apiData = await result.json();
+      const apiData = await result.json();
 
-    console.log(apiData);
+      console.log(apiData);
 
-    fetchCartItems();
-    router.push("/orders");
+      fetchCartItems();
+      router.push("/orders");
+    }
   };
 
   return (
