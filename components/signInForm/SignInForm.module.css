@@ -57,3 +57,8 @@
 .signInForm button:hover {
   background-color: #2a93d0;
 }
+
+.signInForm small {
+  color: gray;
+  margin-bottom: 10px;
+}

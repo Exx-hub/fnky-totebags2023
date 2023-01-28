@@ -2,32 +2,39 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import useLoginValidate from "../../hooks/useLoginValidate";
+import { LoginValidateValues } from "../../types/interfaces";
 import styles from "./SignInForm.module.css";
 
 function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({} as LoginValidateValues);
 
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const loginResult = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    const validationErrors = await useLoginValidate({ email, password });
+    setErrors(validationErrors);
 
-    console.log("loginResult:", loginResult);
-    const { error, ok, status } = loginResult as {
-      error: string;
-      ok: boolean;
-      status: number;
-    };
+    if (!validationErrors.email && !validationErrors.password) {
+      const loginResult = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-    if (!error && ok) {
-      router.push("/");
+      const { error, ok, status } = loginResult as {
+        error: string;
+        ok: boolean;
+        status: number;
+      };
+
+      if (!error && ok) {
+        router.push("/");
+      }
     }
   };
   return (
@@ -43,12 +50,14 @@ function SignInForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
+        {errors.email && <small>{errors.email}</small>}
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
+        {errors.email && <small>{errors.password}</small>}
         <button type="submit">Sign In</button>
       </form>
     </section>

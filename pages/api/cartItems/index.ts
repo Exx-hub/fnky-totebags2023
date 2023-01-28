@@ -59,7 +59,7 @@ export default async function handler(
 
     await user.save();
 
-    res.status(201).json({ message: "Product added to cart!" });
+    res.status(201).json({ message: "Product added to bag!" });
   }
 
   if (req.method === "PATCH") {
@@ -73,6 +73,6 @@ export default async function handler(
 
     await user.save();
 
-    res.status(201).json({ message: "Product removed cart!" });
+    res.status(201).json({ message: "Product removed from bag!" });
   }
 }

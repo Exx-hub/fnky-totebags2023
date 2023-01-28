@@ -57,3 +57,8 @@
 .signUpForm button:hover {
   background-color: #2a93d0;
 }
+
+.signUpForm small {
+  color: gray;
+  margin-bottom: 10px;
+}

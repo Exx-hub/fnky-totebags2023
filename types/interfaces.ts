@@ -50,3 +50,16 @@ export interface IOrderItem {
   shippingAddress: string;
   _id: string;
 }
+
+export interface LoginValidateValues {
+  email: string;
+  password: string;
+}
+
+export interface RegisterValues {
+  name: string;
+  email: string;
+  mobile: string;
+  password: string;
+  confirmPass: string;
+}
