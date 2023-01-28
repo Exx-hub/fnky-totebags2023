@@ -47,5 +47,6 @@ export interface IOrderItem {
     userId: string;
   };
   createdOn: string;
+  shippingAddress: string;
   _id: string;
 }

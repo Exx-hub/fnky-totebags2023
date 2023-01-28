@@ -17,6 +17,7 @@ function OrderItem({ item }: { item: IOrderItem }) {
         <h3>Email: {item.user.email}</h3>
         <h3>Status: In-transit</h3>
         <h3>ETD: {getDeliveryDate()}</h3>
+        <h3>Shipped to: {item.shippingAddress}</h3>
       </div>
       <section className={styles.orderItemGrid}>
         {item.products.map((i) => (

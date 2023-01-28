@@ -33,6 +33,7 @@ function CartItemList({ cartItems, refreshData }: CartItemListProps) {
         },
         body: JSON.stringify({
           email: data?.user?.email,
+          shippingAddress,
         }),
       });
 
@@ -84,7 +85,9 @@ function CartItemList({ cartItems, refreshData }: CartItemListProps) {
               value={shippingAddress}
               onChange={(e) => setShippingAddress(e.target.value)}
             ></textarea>
-            <button type="submit">Confirm Checkout</button>
+            <button type="submit" disabled={shippingAddress.length < 1}>
+              Confirm Checkout
+            </button>
           </form>
         </div>
       </div>

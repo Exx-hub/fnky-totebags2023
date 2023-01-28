@@ -12,6 +12,7 @@ const orderSchema = new Schema({
     email: { type: String, required: true },
   },
   createdOn: { type: Date, default: new Date() },
+  shippingAddress: { type: String, required: true },
 });
 
 const Order = models.Order || model("Order", orderSchema);

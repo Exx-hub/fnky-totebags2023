@@ -2,7 +2,7 @@ import Image from "next/image";
 import { IProduct } from "../../types/interfaces";
 import { FaRegHeart } from "react-icons/fa";
 import styles from "./ShopItemDetail.module.css";
-import { MouseEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ShoppingCartContext } from "../../context/ContextProvider";

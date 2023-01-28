@@ -11,6 +11,7 @@ export default async function handler(
 ) {
   await connectDb();
   const email = req.body.email;
+  const shippingAddress = req.body.shippingAddress;
 
   const products = await Product.find({});
 
@@ -37,6 +38,7 @@ export default async function handler(
         email: email,
         userId: user._id,
       },
+      shippingAddress,
     });
 
     await order.save();
