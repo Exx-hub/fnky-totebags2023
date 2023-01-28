@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import useRegisterValidate from "../../hooks/useRegisterValidate";
+import registerValidate from "../../helpers/registerValidate";
 import { RegisterValues } from "../../types/interfaces";
 import styles from "./SignupForm.module.css";
 
@@ -19,7 +19,7 @@ function SignupForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const validationErrors = await useRegisterValidate({
+    const validationErrors = await registerValidate({
       name,
       email,
       mobile,

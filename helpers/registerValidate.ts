@@ -1,6 +1,6 @@
 import { RegisterValues } from "../types/interfaces";
 
-const useRegisterValidate = async ({
+const registerValidate = async ({
   name,
   email,
   mobile,
@@ -39,4 +39,4 @@ const useRegisterValidate = async ({
   return errors;
 };
 
-export default useRegisterValidate;
+export default registerValidate;

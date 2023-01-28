@@ -2,7 +2,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import useLoginValidate from "../../hooks/useLoginValidate";
+import loginValidate from "../../helpers/loginValidate";
 import { LoginValidateValues } from "../../types/interfaces";
 import styles from "./SignInForm.module.css";
 
@@ -16,7 +16,7 @@ function SignInForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const validationErrors = await useLoginValidate({ email, password });
+    const validationErrors = await loginValidate({ email, password });
     setErrors(validationErrors);
 
     if (!validationErrors.email && !validationErrors.password) {

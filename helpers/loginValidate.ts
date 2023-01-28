@@ -1,6 +1,6 @@
 import { LoginValidateValues } from "../types/interfaces";
 
-const useLoginValidate = async ({ email, password }: LoginValidateValues) => {
+const loginValidate = async ({ email, password }: LoginValidateValues) => {
   let errors = {} as LoginValidateValues;
 
   if (!email) {
@@ -18,4 +18,4 @@ const useLoginValidate = async ({ email, password }: LoginValidateValues) => {
   return errors;
 };
 
-export default useLoginValidate;
+export default loginValidate;
