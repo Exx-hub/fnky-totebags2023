@@ -8,7 +8,6 @@
   margin-bottom: 1rem;
 }
 .wishlistComponentGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  place-items: center;
+  display: flex;
+  flex-wrap: wrap;
 }

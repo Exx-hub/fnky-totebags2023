@@ -4,7 +4,7 @@
   padding: 2rem;
 
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 .shopItemDetailImage {
   border: 1px solid lightgray;
@@ -81,4 +81,21 @@
   width: 100%;
   cursor: pointer;
   padding: 7.4px;
+}
+
+@media screen and (min-width: 768px) {
+  .shopItemDetailContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 1200px) {
 }

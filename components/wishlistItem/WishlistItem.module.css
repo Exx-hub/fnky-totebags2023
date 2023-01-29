@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.wishlistItemContainer img {
+  width: 100%;
+}
+
 .wishlistItemContainer p {
   color: gray;
 }

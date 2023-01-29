@@ -3,6 +3,8 @@
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  font-size: 0.75rem;
 }
 .orderItemGrid {
   display: flex;
@@ -14,4 +16,11 @@
   flex-direction: column;
   align-items: center;
   margin: 0 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .orderItemContainer {
+    flex-direction: row;
+    font-size: 1rem;
+  }
 }

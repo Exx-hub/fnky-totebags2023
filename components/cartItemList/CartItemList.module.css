@@ -7,15 +7,15 @@
 
 .cartItemListGrid {
   display: flex;
+  flex-direction: column;
 }
 
 .myCart {
-  width: 58%;
-  margin-right: 22px;
+  width: 100%;
 }
 
 .orderSummary {
-  width: 40%;
+  width: 100%;
 }
 
 .cartItemListGrid h2 {
@@ -66,4 +66,18 @@
   resize: none;
   border-radius: 5px;
   margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .cartItemListGrid {
+    flex-direction: row;
+  }
+  .myCart {
+    width: 58%;
+    margin-right: 22px;
+  }
+
+  .orderSummary {
+    width: 40%;
+  }
 }

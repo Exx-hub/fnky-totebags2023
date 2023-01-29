@@ -3,9 +3,11 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 1rem;
   max-width: 1100px;
   /* width: 90%; */
+
+  position: relative;
 }
 
 .logo {
@@ -14,8 +16,12 @@
 }
 
 .logo h1 {
-  font-size: 2.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
+}
+
+.logo h4 {
+  font-size: 0.75rem;
 }
 
 .headerRight {
@@ -25,27 +31,64 @@
   position: relative;
 }
 
-.nav ul {
-  display: flex;
+.menuIcon {
+  display: block;
+  cursor: pointer;
 }
 
-.nav a {
-  margin-right: 1rem;
-  font-weight: 700;
-  cursor: pointer;
+.nav {
+  display: none;
 }
 
 .actionButtons {
-  display: flex;
+  display: none;
 }
 
-.actionButtons > div {
+.mobileNav {
+  padding: 0.5rem;
+  width: 110px;
+  z-index: 1000;
+  background-color: #333;
+  color: white;
   display: flex;
-  margin-left: 0.8rem;
-  cursor: pointer;
+  flex-direction: column;
+  position: absolute;
+  right: 16px;
+  top: 50px;
 }
 
-/* temporary */
+@media screen and (min-width: 768px) {
+  .logo h1 {
+    font-size: 2.4rem;
+  }
+  .logo h4 {
+    font-size: 1rem;
+  }
+
+  .nav {
+    display: flex;
+  }
+
+  .nav a {
+    margin-right: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .actionButtons {
+    display: flex;
+  }
+
+  .actionButtons > div {
+    display: flex;
+    margin-left: 0.8rem;
+    cursor: pointer;
+  }
+
+  .menuIcon {
+    display: none;
+  }
+}
+
 @media screen and (min-width: 1500px) {
   .headerContainer {
     max-width: none;

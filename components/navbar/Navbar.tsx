@@ -1,13 +1,14 @@
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import CartBadge from "../cartBadge";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShoppingCartContext } from "../../context/ContextProvider";
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -41,6 +42,13 @@ function Navbar() {
         </section>
 
         <section className={styles.headerRight}>
+          <div
+            className={styles.menuIcon}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </div>
+
           <nav className={styles.nav}>{navLinks}</nav>
 
           {authenticated && (
@@ -53,11 +61,24 @@ function Navbar() {
             </section>
           )}
         </section>
+
+        {menuOpen && (
+          <section
+            className={styles.mobileNav}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {navLinks}
+            {authenticated && (
+              <>
+                <hr />
+                <Link href="/cart">Cart</Link>
+              </>
+            )}
+          </section>
+        )}
       </header>
     </>
   );
 }
 
 export default Navbar;
-
-// if logged in circle with initials for the circle
