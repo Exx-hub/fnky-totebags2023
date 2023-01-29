@@ -8,6 +8,8 @@ import styles from "./ShopItem.module.css";
 
 import { ShoppingCartContext } from "../../context/ContextProvider";
 
+import { toast } from "react-toastify";
+
 interface ShopItemProps {
   item: IProduct;
 }
@@ -42,6 +44,8 @@ function ShopItem({ item }: ShopItemProps) {
     });
 
     const apiData = await result.json();
+
+    toast.success(apiData.message);
 
     fetchCartItems();
 
