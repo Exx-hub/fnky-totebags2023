@@ -10,6 +10,7 @@ function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({} as LoginValidateValues);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -20,6 +21,8 @@ function SignInForm() {
     setErrors(validationErrors);
 
     if (!validationErrors.email && !validationErrors.password) {
+      setLoading(true);
+
       const loginResult = await signIn("credentials", {
         email,
         password,
@@ -31,6 +34,8 @@ function SignInForm() {
         ok: boolean;
         status: number;
       };
+
+      setLoading(false);
 
       if (!error && ok) {
         router.push("/");
@@ -58,7 +63,7 @@ function SignInForm() {
           placeholder="Password"
         />
         {errors.email && <small>{errors.password}</small>}
-        <button type="submit">Sign In</button>
+        <button type="submit">{loading ? "Please wait..." : "Sign In"}</button>
       </form>
     </section>
   );

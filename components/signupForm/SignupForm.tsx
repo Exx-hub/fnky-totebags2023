@@ -12,6 +12,8 @@ function SignupForm() {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const [errors, setErrors] = useState({} as RegisterValues);
 
   const router = useRouter();
@@ -30,6 +32,8 @@ function SignupForm() {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
+      setLoading(true);
+
       fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -43,6 +47,8 @@ function SignupForm() {
         .then((data) => {
           const { success, message } = data;
           console.log(data);
+
+          setLoading(false);
 
           if (success) {
             router.push("/auth/signin");
@@ -92,7 +98,7 @@ function SignupForm() {
           placeholder="Confirm Password"
         />
         {errors.confirmPass && <small>{errors.confirmPass}</small>}
-        <button type="submit">Sign Up</button>
+        <button type="submit">{loading ? "Please wait..." : "Sign Up"}</button>
       </form>
     </section>
   );
