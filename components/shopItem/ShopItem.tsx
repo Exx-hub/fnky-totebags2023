@@ -63,6 +63,7 @@ function ShopItem({ item }: ShopItemProps) {
           alt=""
           width={500}
           height={500}
+          priority={name === "Girl Tiger"}
         />
         {show && (
           <Link href={`/product/${sku}`} className={styles.quickView}>
