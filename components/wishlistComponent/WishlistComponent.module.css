@@ -1,5 +1,5 @@
 .wishlistComponentContainer {
-  max-width: 900px;
+  max-width: 950px;
   margin: 0 auto;
   padding: 2em;
   margin-top: 1rem;
@@ -10,4 +10,5 @@
 .wishlistComponentGrid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
