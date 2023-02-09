@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { PopulatedItem } from "../types/interfaces";
 
 interface ContextProviderProps {
@@ -18,19 +18,19 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
 
   const email = session.data?.user?.email;
 
-  const fetchCartItems = () => {
+  const fetchCartItems = useCallback(() => {
     fetch(`/api/cartItems/${email}`)
       .then((res) => res.json())
       .then((data) => {
         setcartItems(data?.cartItems);
       });
-  };
+  }, [email]);
 
   useEffect(() => {
     if (email) {
       fetchCartItems();
     }
-  }, [email]);
+  }, [email, fetchCartItems]);
 
   return (
     <ShoppingCartContext.Provider value={{ cartQuantity, fetchCartItems }}>
