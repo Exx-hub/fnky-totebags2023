@@ -84,7 +84,8 @@
     cursor: pointer;
   }
 
-  .menuIcon {
+  .menuIcon,
+  .mobileNav {
     display: none;
   }
 }

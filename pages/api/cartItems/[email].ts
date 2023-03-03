@@ -6,15 +6,16 @@ type Data = {
   name: string;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.query;
 
   // console.log(email);
 
   const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(401).json({ message: "User not found." });
+  }
 
   const cartItems = user.cart.items;
 
